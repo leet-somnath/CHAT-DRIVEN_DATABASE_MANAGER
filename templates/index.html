@@ -254,21 +254,24 @@
             scrollToBottom();
         });
 
-        // Voice recognition
         function startVoiceRecognition() {
-            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = 'en-US';
-            recognition.start();
+        const popup = document.getElementById("listening-popup");
+        popup.style.display = "block";
+        
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = "en-US";
+        recognition.start();
 
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript;
-                document.getElementById('question').value = transcript;
-            };
+        recognition.onresult = function(event) {
+            popup.style.display = "none";
+            document.getElementById("question").value = event.results[0][0].transcript;
+        };
 
-            recognition.onerror = function(event) {
-                console.error("Error occurred in recognition: ", event.error);
-            };
-        }
+        recognition.onerror = function() {
+            popup.style.display = "none";
+            alert("Voice recognition failed. Please try again.");
+        };
+    }
     </script>
 </head>
 <body>
@@ -301,6 +304,9 @@
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+            <div id="listening-popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); padding:50px; background-color:#000; color:#94f653; border-radius:80px;">
+               I am Listening...
             </div>
 
             <div class="bottom-input">
