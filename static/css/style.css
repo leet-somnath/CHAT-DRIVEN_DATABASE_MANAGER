@@ -39,7 +39,7 @@ body {
     background-color: #f5f5f5;
     
     border: #121212 solid;
-    border-radius: 20px;
+    border-radius: 40px;
     padding: 10px;
     overflow-y: auto;
     max-height: 90vh;
@@ -48,9 +48,12 @@ body {
 }
 
 .sidebar h2 {
+     border: #121212 solid ;
+     border-radius: 20px;
     font-size: 20px;
-    color: #25de10;
+    color: #0ef735;
     text-align: center;
+   
 }
 
 .history-item {
@@ -69,11 +72,14 @@ body {
 .container {
     flex: 1;
     padding: 16px;
+    border: #121212 solid;
 }
 
 h1 {
+    
     text-align: center;
     color: #25de10;
+    
 }
 
 /* Chat style */
@@ -81,6 +87,8 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    background: rgb(58, 110, 180);
+    background: linear-gradient(190deg, rgb(217, 140, 236) 0%, rgba(2, 252, 234, 1) 100%);
     margin-top: 10px;
     max-height: 70vh;
     overflow-y: auto;
@@ -126,13 +134,13 @@ h1 {
     display: inline-block;
     margin-left: 10px;
     padding: 8px 12px;
-    background-color: #d3b4fc;
+    background-color: #ca9ae6;
     color: #fff;
     border: none;
     border: #121212 solid 1px;
     border-radius: 10px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -165,10 +173,13 @@ input[type="text"], select {
 }
 
 .submit-btn, .clear-btn {
-    background-color: #4CAF50;
-    color: rgb(20, 20, 20);
+    background: rgb(58, 110, 180);
+    background: linear-gradient(90deg, rgb(217, 140, 236) 0%, rgba(2, 252, 234, 1) 100%);
+    color: rgb(246, 242, 242);
     border: none;
+    font-size: large;
     padding: 12px;
+    margin: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 8px;
@@ -178,10 +189,25 @@ input[type="text"], select {
     background-color: #ff4c4c;
 }
 
-.mic-btn {
-    background-color: #72dd74;
+#scroll-down-btn {
+    position: fixed;
+    bottom: 80px; /* Adjust to place above the input section */
+    right: 50%;
+    transform: translateX(50%); /* Center horizontally */
+    background: rgb(58, 110, 180);
+    background: linear-gradient(90deg, rgb(217, 140, 236) 0%, rgba(2, 252, 234, 1) 100%);
     color: white;
     border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 18px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.mic-btn {
+ 
     padding: 12px;
     border-radius: 50%;
     cursor: pointer;
@@ -241,4 +267,22 @@ input[type="text"], select {
 
 .toggle-btn {
     margin-left: 20px; /* Adds space between button and heading, optional */
+}
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-icon {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.delete-icon:hover {
+    color: darkred;
 }

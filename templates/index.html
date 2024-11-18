@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>DataChat - Chat Driven Database Manager</title>
@@ -7,14 +8,19 @@
     <script src="/static/js/script.js"></script>
 
 </head>
+
 <body>
     <div class="main-container">
         <div class="sidebar">
             <h2>Conversation History</h2>
             {% for entry in conversation %}
-            <div class="history-item" onclick="scrollToEntry('{{ entry.id }}')">
-                {{ entry.question | truncate(30) }}
+            <div class="history-item" id="history-item-{{ entry.id }}">
+                <span onclick="scrollToEntry('{{ entry.id }}')">
+                    {{ entry.question | truncate(30) }}
+                </span>
+                <button class="delete-icon" onclick="deleteChat('{{ entry.id }}')">❌</button>
             </div>
+
             {% endfor %}
         </div>
 
@@ -24,28 +30,32 @@
                 <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
             </div>
             <div class="conversation">
+                <button id="scroll-down-btn" style="display: none;" onclick="scrollToBottom()">⬇️</button>
                 {% for entry in conversation %}
                 <div class="entry user-message" id="{{ entry.id }}">
                     <img src="/static/images/profile-user.png" class="avatar" alt="User">
                     <div>{{ entry.question }}</div>
                 </div>
-                <div class="entry bot-response">
+                <div class="entry bot-response" id="bot-response-{{ entry.id }}">
                     <img src="/static/images/Bot.png" class="avatar" alt="Bot">
                     <div>
                         <strong>SQL Query:</strong> {{ entry.query }}<br>
                         {{ entry.data_html | safe }}
-                        <a href="{{ url_for('download_data', entry_id=entry.id) }}" class="download-btn">Download
-                            CSV</a>
+                        <a href="{{ url_for('download_data', entry_id=entry.id) }}" class="download-btn">Download CSV</a>
                     </div>
                 </div>
+                
                 {% endfor %}
             </div>
+            <button id="scroll-down-btn" style="display: none;" onclick="scrollToBottom()">⬇️</button>
+
             <div id="listening-popup"
                 style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); padding:50px; background-color:#000; color:#94f653; border-radius:80px;">
                 I am Listening...
             </div>
 
             <div class="bottom-input">
+
                 <form method="POST" onsubmit="scrollToBottom()">
                     <label for="table">Select a table:</label>
                     <select name="table" id="table">
@@ -59,7 +69,7 @@
                             <input type="text" id="question" name="question" placeholder="Enter your query:" required>
                             <button type="button" class="mic-btn" onclick="startVoiceRecognition()">🎤</button>
                             <button type="submit" class="submit-btn">Send</button>
-                            <button type="button" class="clear-btn" onclick="clearHistory()">Clear</button>
+                       
                         </div>
                     </div>
                 </form>
